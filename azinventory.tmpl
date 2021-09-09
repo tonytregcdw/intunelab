@@ -1,0 +1,10 @@
+---
+azwin10:
+  hosts:
+    azwin1001:
+      ansible_host: ${azwin1001-pip}
+  vars:
+      ansible_user: ${azwinuser}
+      ansible_password: ${azwinpass}
+      ansible_connection: winrm
+      ansible_winrm_server_cert_validation: ignore

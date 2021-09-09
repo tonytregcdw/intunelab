@@ -1,0 +1,74 @@
+#configureAzureWinVmWinRM.yaml
+---
+- hosts: localhost
+  gather_facts: false
+  connection: local
+  vars:
+    var_azurerg: wvd-baselabv1-region1infra
+    var_vmname: r1-win1001-vm
+    var_vmpip: r1-win1001-pip  
+
+  tasks:
+
+    - name: Power On
+      azure.azcollection.azure_rm_virtualmachine:
+        resource_group: "{{ var_azurerg }}"
+        name: "{{ var_vmname }}"
+        started: yes
+    - name: pause for 30 seconds
+      pause:
+        seconds: 30
+
+#update the image
+
+- hosts: azwin10
+  gather_facts: false
+  vars:
+    adds_fqdn: ttlab.local
+    adds_admin_user: ttwinrm@ttlab.local 
+    adds_admin_pass: Ansiblem@nage
+    adds_ou_path: "OU=SessionHosts,OU=Citrix,OU=Infra,DC=ttlab,DC=local"
+    appinstall_path: \\WS2019ADDS01\applications
+    ansible_become: yes
+    ansible_become_method: runas
+    ansible_become_user: "{{ adds_admin_user }}"
+    ansible_become_password: "{{ adds_admin_pass }}"
+    ansible_become_flags: logon_type=new_credentials logon_flags=netcredentials_only 
+    
+  tasks:
+  
+    - name: run update
+      win_shell: write-host "something" | out-file c:\something.txt
+
+#power down, snapshot, generalise and create an image
+- hosts: localhost
+  gather_facts: false
+  connection: local
+  vars:
+    var_azurerg: wvd-baselabv1-region1infra
+    var_vmname: r1-win1001-vm
+    var_vmpip: r1-win1001-pip  
+
+  tasks:
+    - name: Power Off
+      azure.azcollection.azure_rm_virtualmachine:
+        resource_group: "{{ var_azurerg }}"
+        name: "{{ var_vmname }}"
+        started: no
+
+    - name: snapshot
+      azure.azcollection.azure_rm_snapshot:
+         resource_group: "{{ var_azurerg }}"
+         name: mySnapshot
+         creation_data:
+           create_option: Copy
+           source_id: '/subscriptions/a2d3df79-3372-479d-83b8-7140c9f56b5c/resourceGroups/wvd-baselabv1-region1infra/providers/Microsoft.Compute/disks/r1-win1001-vm_OsDisk_1_00d8d4fc58a24cb4b3587ce10a149478'
+
+    - name: generalize the vm
+      command: "az vm generalize --resource-group {{ var_azurerg }} --name {{ var_vmname }}"
+
+    - name: Create an image from a virtual machine
+      azure.azcollection.azure_rm_image:
+        resource_group: "{{ var_azurerg }}"
+        name: myImage
+        source: "{{ var_vmname }}"
