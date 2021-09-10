@@ -24,22 +24,19 @@
 - hosts: azwin10
   gather_facts: false
   vars:
-    adds_fqdn: ttlab.local
-    adds_admin_user: ttwinrm@ttlab.local 
-    adds_admin_pass: Ansiblem@nage
-    adds_ou_path: "OU=SessionHosts,OU=Citrix,OU=Infra,DC=ttlab,DC=local"
-    appinstall_path: \\WS2019ADDS01\applications
     ansible_become: yes
     ansible_become_method: runas
     ansible_become_user: "{{ adds_admin_user }}"
     ansible_become_password: "{{ adds_admin_pass }}"
-    ansible_become_flags: logon_type=new_credentials logon_flags=netcredentials_only 
+    ansible_become_flags: logon_type=interactive logon_flags=with_profile
     
   tasks:
   
     - name: run update
       win_shell: write-host "something" | out-file c:\something.txt
-
+    - name: run sysprep generalize
+      win_shell: cmd /c c:\windows\system32\sysprep\sysprep.exe /oobe /shutdown /generalize
+      
 #power down, snapshot, generalise and create an image
 - hosts: localhost
   gather_facts: false
@@ -56,13 +53,13 @@
         name: "{{ var_vmname }}"
         started: no
 
-    - name: snapshot
-      azure.azcollection.azure_rm_snapshot:
-         resource_group: "{{ var_azurerg }}"
-         name: mySnapshot
-         creation_data:
-           create_option: Copy
-           source_id: '/subscriptions/a2d3df79-3372-479d-83b8-7140c9f56b5c/resourceGroups/wvd-baselabv1-region1infra/providers/Microsoft.Compute/disks/r1-win1001-vm_OsDisk_1_00d8d4fc58a24cb4b3587ce10a149478'
+#    - name: snapshot
+#      azure.azcollection.azure_rm_snapshot:
+#         resource_group: "{{ var_azurerg }}"
+#         name: mySnapshot
+#         creation_data:
+#           create_option: Copy
+#           source_id: #'/subscriptions/a2d3df79-3372-479d-83b8-7140c9f56b5c/resourceGroups/wvd-baselabv1-region1infra/providers/Microsoft.Compute/disks/r1-win1001-vm_OsDisk_1_00d8d4fc58a24cb4b3587ce10a149478'
 
     - name: generalize the vm
       command: "az vm generalize --resource-group {{ var_azurerg }} --name {{ var_vmname }}"
