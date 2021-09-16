@@ -283,7 +283,7 @@ resource "azurerm_windows_virtual_machine" "r1-win1001-vm" {
   source_image_reference {
     publisher = "MicrosoftWindowsDesktop"
     offer     = "Windows-10"
-    sku       = "rs5-enterprisen-standard"
+    sku       = "rs5-evd"
     version   = "latest"
   }
 }
