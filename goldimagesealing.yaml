@@ -32,7 +32,7 @@
     
   tasks:
     - name: run update
-      win_shell: echo "something" | out-file c:\something.txt
+      win_shell: echo "image updated {{ ansible_date_time.iso8601_basic_short }}" | out-file c:\imageupdatelog.txt -append
     - name: run sysprep generalize
       win_shell: cmd /c c:\windows\system32\sysprep\sysprep.exe /oobe /shutdown /generalize
       ignore_errors: yes
