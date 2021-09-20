@@ -10,48 +10,48 @@
 
   tasks:
 
-    - name: Power On
-      azure.azcollection.azure_rm_virtualmachine:
-        resource_group: "{{ var_azurerg }}"
-        name: "{{ var_vmname }}"
-        started: yes
-    - name: pause for 30 seconds
-      pause:
-        seconds: 30
+#    - name: Power On
+#      azure.azcollection.azure_rm_virtualmachine:
+#        resource_group: "{{ var_azurerg }}"
+#        name: "{{ var_vmname }}"
+#        started: yes
+#    - name: pause for 30 seconds
+#      pause:
+#        seconds: 30
 
 #update the image
 
-- hosts: azwin10
-  gather_facts: false
-  vars:
-    ansible_become: yes
-    ansible_become_method: runas
-    ansible_become_user: "{{ adds_admin_user }}"
-    ansible_become_password: "{{ adds_admin_pass }}"
-    ansible_become_flags: logon_type=interactive logon_flags=with_profile
+#- hosts: azwin10
+#  gather_facts: false
+#  vars:
+#    ansible_become: yes
+#    ansible_become_method: runas
+#    ansible_become_user: "{{ adds_admin_user }}"
+#    ansible_become_password: "{{ adds_admin_pass }}"
+#    ansible_become_flags: logon_type=interactive logon_flags=with_profile
     
-  tasks:
+#  tasks:
   
-    - name: run update
-      win_shell: write-host "something" | out-file c:\something.txt
-    - name: run sysprep generalize
-      win_shell: cmd /c c:\windows\system32\sysprep\sysprep.exe /oobe /shutdown /generalize
+#    - name: run update
+#      win_shell: write-host "something" | out-file c:\something.txt
+#    - name: run sysprep generalize
+#      win_shell: cmd /c c:\windows\system32\sysprep\sysprep.exe /oobe /shutdown /generalize
       
 #power down, snapshot, generalise and create an image
-- hosts: localhost
-  gather_facts: false
-  connection: local
-  vars:
-    var_azurerg: wvd-baselabv1-region1infra
-    var_vmname: r1-win1001-vm
-    var_vmpip: r1-win1001-pip  
+#- hosts: localhost
+#  gather_facts: false
+#  connection: local
+#  vars:
+#    var_azurerg: wvd-baselabv1-region1infra
+#    var_vmname: r1-win1001-vm
+#    var_vmpip: r1-win1001-pip  
 
-  tasks:
-    - name: Power Off
-      azure.azcollection.azure_rm_virtualmachine:
-        resource_group: "{{ var_azurerg }}"
-        name: "{{ var_vmname }}"
-        started: no
+#  tasks:
+#    - name: Power Off
+#      azure.azcollection.azure_rm_virtualmachine:
+#        resource_group: "{{ var_azurerg }}"
+#        name: "{{ var_vmname }}"
+#        started: no
 
 #    - name: snapshot
 #      azure.azcollection.azure_rm_snapshot:
