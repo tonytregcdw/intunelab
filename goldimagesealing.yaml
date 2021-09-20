@@ -30,8 +30,7 @@
     ansible_become_password: "{{ adds_admin_pass }}"
     ansible_become_flags: logon_type=interactive logon_flags=with_profile
     
-#  tasks:
-  
+  tasks:
     - name: run update
       win_shell: write-host "something" | out-file c:\something.txt
     - name: run sysprep generalize
