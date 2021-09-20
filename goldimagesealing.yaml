@@ -55,7 +55,6 @@
         resource_group: "{{ var_azurerg }}"
         name: "{{ var_vmname }}"
         started: no
-        ignore_errors: yes
 
 #    - name: snapshot
 #      azure.azcollection.azure_rm_snapshot:
@@ -71,5 +70,5 @@
     - name: Create an image from a virtual machine
       azure.azcollection.azure_rm_image:
         resource_group: "{{ var_azurerg }}"
-        name: myImage
+        name: "myImage.{{ ansible_date_time.iso8601_basic_short }}"
         source: "{{ var_vmname }}"
