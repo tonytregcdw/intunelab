@@ -1,7 +1,7 @@
 #configureAzureWinVmWinRM.yaml
 ---
 - hosts: localhost
-  gather_facts: false
+  gather_facts: true
   connection: local
   vars:
     var_azurerg: wvd-baselabv1-region1infra
