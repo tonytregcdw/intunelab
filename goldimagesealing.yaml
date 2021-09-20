@@ -37,7 +37,9 @@
       win_shell: cmd /c c:\windows\system32\sysprep\sysprep.exe /oobe /shutdown /generalize
       ignore_errors: yes
       ignore_unreachable: yes
-      
+    - name: pause for 300 seconds
+      pause:
+        seconds: 300
 #power down, snapshot, generalise and create an image
 - hosts: localhost
   gather_facts: false
