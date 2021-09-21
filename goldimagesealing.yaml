@@ -1,12 +1,8 @@
 #configureAzureWinVmWinRM.yaml
 ---
-- hosts: azure
+- hosts: azresources
   gather_facts: false
   connection: local
-  vars:
-    var_azurerg: wvd-baselabv1-region1infra
-    var_vmname: r1-win1001-vm
-    var_vmpip: r1-win1001-pip  
 
   tasks:
 
@@ -42,13 +38,9 @@
         seconds: 300
 
 #power down, snapshot, generalise and create an image
-- hosts: azure
+- hosts: azresources
   gather_facts: true
   connection: local
-  vars:
-    var_azurerg: wvd-baselabv1-region1infra
-    var_vmname: r1-win1001-vm
-    var_vmpip: r1-win1001-pip  
 
   tasks:
     - name: Power Off
