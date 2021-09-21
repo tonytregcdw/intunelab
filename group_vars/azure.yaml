@@ -1,0 +1,3 @@
+var_azurerg: wvd-baselabv1-region1infra
+var_vmname: r1-win1001-vm
+var_vmpip: r1-win1001-pip  
