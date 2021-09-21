@@ -1,6 +1,6 @@
 #configureAzureWinVmWinRM.yaml
 ---
-- hosts: localhost
+- hosts: azure
   gather_facts: false
   connection: local
   vars:
@@ -42,7 +42,7 @@
         seconds: 300
 
 #power down, snapshot, generalise and create an image
-- hosts: localhost
+- hosts: azure
   gather_facts: true
   connection: local
   vars:
