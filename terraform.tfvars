@@ -1,7 +1,7 @@
 environment_tag = "TTLAB-Azure-Goldbuild-Lab"
 azure-rg-1 = "wvd-baselabv1-region1infra"
 azure-rg-2 = "wvd-baselabv1-security"
-loc1 = "eastus"
+loc1 = "uksouth"
 region1-vnet1-name = "region1-vnet1-main"
 region1-vnet1-address-space = "10.11.0.0/16"
 region1-vnet1-snet1-name = "region1-vnet1-snet-infra1"
