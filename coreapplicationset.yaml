@@ -4,11 +4,11 @@
   args:
     creates: C:\Program Files (x86)\Microsoft Office\root\Office16\EXCEL.EXE
 
-- name: MS Teams X64
-  win_shell: cmd /c "$env:appinstall\Microsoft Teams\install-MSTeams_x64.CMD"
-  ignore_errors: yes
-  args:
-    creates: C:\Program Files (x86)\Microsoft\Teams\current\Teams.exe
+#- name: MS Teams X64
+#  win_shell: cmd /c "$env:appinstall\Microsoft Teams\install-MSTeams_x64.CMD"
+#  ignore_errors: yes
+#  args:
+#    creates: C:\Program Files (x86)\Microsoft\Teams\current\Teams.exe
 
 - name: Google Chrome
   win_shell: cmd /c "$env:appinstall\Google Chrome Enterprise\install-GoogleChrome.CMD"
@@ -36,7 +36,7 @@
   args:
     creates: C:\Program Files\Notepad++\notepad++.exe
 
-- name: Install Oracele JRE
-  win_shell: cmd /c "$env:appinstall\Oracle JRE 8\Install-OracleJRE.cmd"
-  args:
-    creates: C:\Program Files (x86)\Java\jre1.8.0_291\bin\java.exe
+#- name: Install Oracele JRE
+#  win_shell: cmd /c "$env:appinstall\Oracle JRE 8\Install-OracleJRE.cmd"
+#  args:
+#    creates: C:\Program Files (x86)\Java\jre1.8.0_291\bin\java.exe
