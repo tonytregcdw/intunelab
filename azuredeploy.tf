@@ -17,7 +17,7 @@ resource "azurerm_resource_group" "w10endpointrg" {
   }
 }
 #Resource Groups
-resource "azurerm_resource_group" "w10endpointg2" {
+resource "azurerm_resource_group" "w10endpointrg2" {
   name     = var.azure-rg-2
   location = var.loc1
   tags = {
