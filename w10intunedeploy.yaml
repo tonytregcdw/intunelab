@@ -13,11 +13,7 @@
     win_shell: DISM.exe /Online /Add-ProvisioningPackage /PackagePath:C:\temp\w10AADjoin\w10AADjoin.ppkg
 
   - name: Disable RDP network level auth to allow AAD accounts to logon remotely.
-    win_regedit:
-      path: HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp
-      name: SecurityLayer
-      data: 0
-      type: dword
+    win_shell: (Get-WmiObject -class "Win32_TSGeneralSetting" -Namespace root\cimv2\terminalservices -Filter "TerminalName='RDP-tcp'").SetUserAuthenticationRequired(0)
 
   - name: Reboot post AD domain and intune linkup
     win_reboot:
