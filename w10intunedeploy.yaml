@@ -12,13 +12,13 @@
   - name: download provisioning package
     ansible.windows.win_get_url:
       url: https://ttsmbstorage.blob.core.windows.net/aadjoin/AADjoin.zip
-      dest: c:\scripts\AADjoin.zip
+      dest: '%TEMP%\AADjoin.zip'
       
   - name: Unzip prov package
     win_unzip:
-      src: c:\scripts\AADjoin.zip
-      dest: c:\scripts\AADjoin
-      creates: c:\scripts\AADjoin
+      src: '%TEMP%\AADjoin.zip'
+      dest: '%TEMP%\AADjoin'
+      creates: '%TEMP%\AADjoin'
 
   - name: Run provisioning package to join to AAD
     win_shell: DISM.exe /Online /Add-ProvisioningPackage /PackagePath:c:\scripts\AADjoin\w10AADjoin.ppkg
