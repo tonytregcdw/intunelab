@@ -8,9 +8,20 @@
     ansible_become_flags: logon_type=new_credentials logon_flags=netcredentials_only
     
   tasks:
+  
+  - name: download provisioning package
+    ansible.windows.win_get_url:
+      url: https://ttsmbstorage.blob.core.windows.net/aadjoin/AADjoin.zip
+      dest: c:\scripts\AADjoin.zip
+      
+  - name: Unzip prov package
+    win_unzip:
+      src: c:\scripts\AADjoin.zip
+      dest: c:\scripts\AADjoin
+      creates: c:\scripts\AADjoin
 
   - name: Run provisioning package to join to AAD
-    win_shell: DISM.exe /Online /Add-ProvisioningPackage /PackagePath:C:\temp\w10AADjoin\w10AADjoin.ppkg
+    win_shell: DISM.exe /Online /Add-ProvisioningPackage /PackagePath:c:\scripts\AADjoin\w10AADjoin.ppkg
 
   - name: Disable RDP network level auth to allow AAD accounts to logon remotely.
     win_shell: (Get-WmiObject -class "Win32_TSGeneralSetting" -Namespace root\cimv2\terminalservices -Filter "TerminalName='RDP-tcp'").SetUserAuthenticationRequired(0)
