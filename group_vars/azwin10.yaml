@@ -1,14 +1,12 @@
 ---
 #local_admin_user: administrator
 #local_admin_pass: Ansiblem@nage
-adds_admin_user: ttwinrm@ttlab.local
-adds_admin_pass: Ansiblem@nage
-adds_fqdn: ttlab.local
-adds_ou_path: "OU=win10,OU=Session Hosts,OU=WVD,DC=ttlab,DC=local"
+aad_admin_user: AzureAD\ttwinrm@trickyjoeintune.onmicrosoft.com
+aad_admin_pass: Ansiblem@nage1111
 appinstall_path: \\ttsmbstorage.file.core.windows.net\applications
 ansible_connection: winrm
 ansible_winrm_server_cert_validation: ignore
 #ansible_user: "{{ local_admin_user }}"
 #ansible_password: "{{ local_admin_pass }}"
-ansible_become_user: "{{ adds_admin_user }}"
-ansible_become_password: "{{ adds_admin_pass }}"
+ansible_become_user: "{{ aad_admin_user }}"
+ansible_become_password: "{{ aad_admin_pass }}"
