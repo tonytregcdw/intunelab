@@ -26,6 +26,12 @@
   - name: Disable RDP network level auth to allow AAD accounts to logon remotely.
     win_shell: (Get-WmiObject -class "Win32_TSGeneralSetting" -Namespace root\cimv2\terminalservices -Filter "TerminalName='RDP-tcp'").SetUserAuthenticationRequired(0)
 
+  - name: instal chocolately
+    win_shell: Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+  - name: install git
+    win_shell: choco install git
+    
 #  - name: Reboot post AAD domain join
 #    win_reboot:
 
