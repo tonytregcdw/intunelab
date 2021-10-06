@@ -31,6 +31,12 @@
 
   - name: install git
     win_shell: choco install git
+
+  - name: Install-Module AzureAD
+    win_shell: Install-Module AzureAD
+    
+  - name: download intune powershell from git
+    win_shell: git clone https://github.com/microsoftgraph/powershell-intune-samples c:\psintune
     
 #  - name: Reboot post AAD domain join
 #    win_reboot:
