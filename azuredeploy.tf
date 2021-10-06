@@ -216,7 +216,7 @@ resource "azurerm_windows_virtual_machine" "r1-win1001-vm" {
   source_image_reference {
     publisher = "MicrosoftWindowsDesktop"
     offer     = "Windows-10"
-    sku       = "20h2-ent-g2"
+    sku       = "21h1-ent-g2"
     version   = "latest"
   }
 }
