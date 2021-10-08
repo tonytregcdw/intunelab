@@ -64,8 +64,12 @@
   - name: Run AAD provisioning package to join to AAD
     win_shell: DISM.exe /Online /Add-ProvisioningPackage /PackagePath:"%TEMP%\AADjoin\w10AADjoin.ppkg"
 
-#  - name: Reboot post AAD domain join
-#    win_reboot:
+  - name: pause for 300 seconds
+    pause:
+      seconds: 300
+
+  - name: Reboot post AAD domain join
+    win_reboot:
 
 #  - name: Add AAD user as a local admin
 #    win_shell: net localgroup administrators "{{ aad_admin_user }}" /add
