@@ -62,11 +62,8 @@
       creates: '%TEMP%\AADjoin'
 
   - name: Run AAD provisioning package to join to AAD
-    win_shell: DISM.exe /Online /Add-ProvisioningPackage /PackagePath:"%TEMP%\AADjoin\w10AADjoin.ppkg"
-    args:
-      executable: cmd.exe
-
-#PS: Install-ProvisioningPackage -PackagePath "%TEMP%\AADjoin\w10AADjoin.ppkg"
+    win_shell: Install-ProvisioningPackage -PackagePath "%TEMP%\AADjoin\w10AADjoin.ppkg" -QuietInstall
+#    DISM.exe /Online /Add-ProvisioningPackage /PackagePath:"%TEMP%\AADjoin\w10AADjoin.ppkg"
 
   - name: pause for 300 seconds
     pause:
