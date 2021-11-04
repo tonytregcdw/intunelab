@@ -75,3 +75,5 @@
 
 #  - name: Add AAD user as a local admin
 #    win_shell: net localgroup administrators "{{ aad_admin_user }}" /add
+#    args:
+#      executable: cmd.exe
