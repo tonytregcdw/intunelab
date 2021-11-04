@@ -65,7 +65,9 @@
     win_shell: DISM.exe /Online /Add-ProvisioningPackage /PackagePath:"%TEMP%\AADjoin\w10AADjoin.ppkg"
     args:
       executable: cmd.exe
-      
+
+#PS: Install-ProvisioningPackage -PackagePath "%TEMP%\AADjoin\w10AADjoin.ppkg"
+
   - name: pause for 300 seconds
     pause:
       seconds: 300
