@@ -1,6 +1,6 @@
 
 # Azure Bastion - Region 1
-resource "azurerm_subnet" "region1-hub-snet-bastion" {
+resource "azurerm_subnet" "region1-vnet1-snet-bastion" {
   name                 = "AzureBastionSubnet"
   resource_group_name  = azurerm_resource_group.w10endpointrg.name
   virtual_network_name = azurerm_virtual_network.region1-vnet1-hub1.name
